@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="698b64be-9de4-4354-9e55-2b96e5e71511" name="first" url="http://185.60.134.195">
+        <fileTransfer rootFolder="/home/pylavaigun" accessType="SFTP" host="185.60.134.195" port="22" sshConfigId="42ea02ed-2fa3-4b06-9253-d7c694f89286" sshConfig="root@185.60.134.195:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
