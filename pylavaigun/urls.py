@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
+from ml_app import views
 
 urlpatterns = [
+    path("", views.index, name="main"),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += [
      path('ml_app/', include('ml_app.urls')),
+]
+urlpatterns += [
+     path('account/', include('account.urls')),
 ]
 
 # Используйте static() чтобы добавить соотношения для статических файлов
