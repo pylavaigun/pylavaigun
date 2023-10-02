@@ -26,7 +26,7 @@ urlpatterns += [
      path('ml_app/', include('ml_app.urls')),
 ]
 urlpatterns += [
-     path('account/', include('account.urls')),
+#     path('account/', include('account.urls')),
 ]
 
 # Используйте static() чтобы добавить соотношения для статических файлов
