@@ -89,6 +89,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     # должен управлять объектами этого типа.
     objects = UserManager()
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
     def __str__(self):
         """ Строковое представление модели (отображается в консоли) """
         return self.email
