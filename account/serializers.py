@@ -29,7 +29,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 
-class LoginSerializers(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
     password = serializers.CharField(
         label=("Password"),
