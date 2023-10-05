@@ -7,21 +7,18 @@ from rest_framework.views import APIView
 from .serializers import RegistrationSerializer
 
 
-class RegistrationAPIView(APIView):
-    """
-    Разрешить всем пользователям (аутентифицированным и нет) доступ к данному эндпоинту.
-    """
-    permission_classes = (AllowAny,)
+from rest_framework import permissions
+from rest_framework.generics import CreateAPIView
+from django.contrib.auth import get_user_model # If used custom user model
+
+from .serializers import RegistrationSerializer
+
+
+class CreateUserView(CreateAPIView):
+
+    model = get_user_model()
+    permission_classes = [
+        permissions.AllowAny # Or anon users can't register
+    ]
     serializer_class = RegistrationSerializer
-
-    def post(self, request):
-        user = request.data.get('user', {})
-
-        # Паттерн создания сериализатора, валидации и сохранения - довольно
-        # стандартный, и его можно часто увидеть в реальных проектах.
-        serializer = self.serializer_class(data=user)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
 # Create your views here.
