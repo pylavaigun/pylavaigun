@@ -27,51 +27,31 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ("email", "username", "password", )
 
 
-class LoginSerializer(serializers.Serializer):
+
+
+class LoginSerializers(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-    username = serializers.CharField(max_length=255, read_only=True)
-    password = serializers.CharField(max_length=128, write_only=True)
-    token = serializers.CharField(max_length=255, read_only=True)
+    password = serializers.CharField(
+        label=_("Password"),
+        style={'input_type': 'password'},
+        trim_whitespace=False,
+        max_length=128,
+        write_only=True
+    )
 
     def validate(self, data):
-        # В методе validate мы убеждаемся, что текущий экземпляр
-        # LoginSerializer значение valid. В случае входа пользователя в систему
-        # это означает подтверждение того, что присутствуют адрес электронной
-        # почты и то, что эта комбинация соответствует одному из пользователей.
-        username = data.get('username', None)
-        password = data.get('password', None)
+        username = data.get('email')
+        password = data.get('password')
 
-        # Вызвать исключение, если не предоставлена почта.
-        if username is None:
-            raise serializers.ValidationError(
-                'An email address is required to log in.'
-            )
+        if username and password:
+            user = authenticate(request=self.context.get('request'),
+                                username=username, password=password)
+            if not user:
+                msg = _('Unable to log in with provided credentials.')
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = _('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
 
-        # Вызвать исключение, если не предоставлен пароль.
-        if password is None:
-            raise serializers.ValidationError(
-                'A password is required to log in.'
-            )
-
-        user = authenticate(username=username, password=password)
-
-        if user is None:
-            raise serializers.ValidationError(
-                'A user with this email and password was not found.'
-            )
-
-        if not user.is_active:
-            raise serializers.ValidationError(
-                'This user has been deactivated.'
-            )
-
-        return {
-            'email': user.email,
-            'username': user.username,
-            'token': user.token
-        }
-
-    class Meta:
-        model = UserModel
-        # Tuple of serialized model fields (see link [2])
-        fields = ("email", "username", "password", )
+        data['user'] = user
+        return data
