@@ -14,6 +14,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         user = UserModel.objects.create_user(
+            email=validated_data['email'],
             username=validated_data['username'],
             password=validated_data['password'],
         )
@@ -23,4 +24,4 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         # Tuple of serialized model fields (see link [2])
-        fields = ( "email", "username", "password", )
+        fields = ("email", "username", "password", )
