@@ -6,5 +6,5 @@ app_name = 'account'
 urlpatterns = [
     path('register/', CreateUserView.as_view()),
     # Аутентификация:
-    path('api/auth/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]
