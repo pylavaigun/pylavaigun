@@ -26,7 +26,7 @@ class CreateUserView(CreateAPIView):
 
 class LoginAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        serializer = LoginSerializers(data=request.data, context={'request': request})
+        serializer = LoginSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         update_last_login(None, user)
