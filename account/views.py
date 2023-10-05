@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers import RegistrationSerializer, LoginSerializer
 
@@ -24,10 +25,7 @@ class CreateUserView(CreateAPIView):
 # Create your views here.
 
 
-class LoginAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = LoginSerializer(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        update_last_login(None, user)
-        return Response({"status": status.HTTP_200_OK})
+class CustomTokenObtainPairView(TokenObtainPairView):
+    # Replace the serializer with your custom
+    serializer_class = CustomTokenObtainPairSerializer
+    http_method_names = ['get', 'head', 'post']

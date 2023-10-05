@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import CreateUserView, LoginAPIView
+from .views import CreateUserView, CustomTokenObtainPairView
 
 app_name = 'account'
 urlpatterns = [
     path('register/', CreateUserView.as_view()),
-    path('login/', LoginAPIView.as_view()),
+    # Аутентификация:
+    path('api/auth/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]

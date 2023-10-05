@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from .models import User
 
 from rest_framework import serializers
@@ -29,30 +31,32 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 
-class LoginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=255)
-    password = serializers.CharField(
-        label=("Password"),
-        style={'input_type': 'password'},
-        trim_whitespace=False,
-        max_length=128,
-        write_only=True
-    )
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "username", "password"]
+
+    def create(self, validated_data):
+        user = User.objects.create(email=validated_data['email'],
+                                   username=validated_data['username'],
+                                   password=validated_data['password'],
+
+                                   )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
-    def validate(self, data):
-        username = data.get('email')
-        password = data.get('password')
 
-        if username and password:
-            user = authenticate(request=self.context.get('request'),
-                                username=username, password=password)
-            if not user:
-                msg = _('Unable to log in with provided credentials.')
-                raise serializers.ValidationError(msg, code='authorization')
-        else:
-            msg = _('Must include "username" and "password".')
-            raise serializers.ValidationError(msg, code='authorization')
 
-        data['user'] = user
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        # The default result (access/refresh tokens)
+        data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
+        # Custom data you want to include
+        data.update({'user': self.user.username})
+        data.update({'email': self.user.email})
+        data.update({'id': self.user.id})
+        # and everything else you want to send in the response
         return data
