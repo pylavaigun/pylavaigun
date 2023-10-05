@@ -82,8 +82,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Свойство USERNAME_FIELD сообщает нам, какое поле мы будем использовать
     # для входа в систему. В данном случае мы хотим использовать почту.
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     # Сообщает Django, что определенный выше класс UserManager
     # должен управлять объектами этого типа.
