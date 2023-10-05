@@ -39,6 +39,7 @@ class LoginSerializers(serializers.Serializer):
         write_only=True
     )
 
+
     def validate(self, data):
         username = data.get('email')
         password = data.get('password')
