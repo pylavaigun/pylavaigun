@@ -20,9 +20,11 @@ from ml_app import views as ml_views
 from account import views as acc_views
 
 urlpatterns = [
+    #Main page
     path("", acc_views.index, name="main"),
     path('admin/', admin.site.urls),
 ]
+
 #Adding url-files of apps to the project
 urlpatterns += [
      path('ml_app/', include('ml_app.urls')),
