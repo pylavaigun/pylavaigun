@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 from ml_app import views as ml_views
 from account import views as acc_views
 
