@@ -15,6 +15,11 @@ from django.contrib.auth import get_user_model # If used custom user model
 from .serializers import RegistrationSerializer
 
 
+#Show main page
+def index(request):
+    template = 'index.html'
+    return render(request, template)
+
 class CreateUserView(CreateAPIView):
 
     model = get_user_model()
@@ -29,3 +34,4 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     # Replace the serializer with your custom
     serializer_class = CustomTokenObtainPairSerializer
     http_method_names = ['get', 'head', 'post']
+
