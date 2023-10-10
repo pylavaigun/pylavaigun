@@ -6,10 +6,9 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
 
+    </head>
+    <body style="background: #222568">
 
         <ul>
             <li><a href="">Меню f</a></li>
@@ -17,7 +16,68 @@
             <li><a href="#">Меню 3</a></li>
             <li><a href="#">Меню 4</a></li>
         </ul>
+
+        <ul>
+            <li><a href="">Войти</a></li>
+            <li><a href="">Регистрация</a></li>
+        </ul>
+
+        <div class="content">
             {% block content %}
             {% endblock %}
+        </div>
+
+
+
+    <style>
+
+
+    .content{
+        border-radius: 10px;
+        padding: 150px;
+        background: white;
+    }
+
+    ul {
+        display: flex;
+        height: 80px;
+        align-content: center;
+        list-style: none; /*убираем маркеры списка*/
+        margin-top:20px; /*делаем отступ сверху*/
+        padding: 20px;
+        justify-content: center;/*чтоб меню по центру было*/
+
+    }
+
+    a {
+      align-content: center;
+      text-align: center;
+      text-decoration: none; /*убираем подчеркивание текста ссылок*/
+      background: #0b681d; /*добавляем фон к пункту меню*/
+      color:#fff; /*меняем цвет ссылок*/
+      padding:10px; /*добавляем отступ*/
+      font-family: arial; /*меняем шрифт*/
+      border-radius:4px; /*добавляем скругление*/
+      -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+      -o-transition: all 0.3s 0.01s ease;
+      -webkit-transition: all 0.3s 0.01s ease;
+   }
+   a:hover {
+      background: #bfdeee;/*добавляем эффект при наведении*/
+      text-decoration: none;
+       text-decoration-color: #1C85BB;
+   }
+
+   li {
+
+    display: inline-block;
+    margin: 5px;
+    width: 100px;
+    align-content: center;
+
+   }
+    </style>
+
+
 
     </body>

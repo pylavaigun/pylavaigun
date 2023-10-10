@@ -1,4 +1,4 @@
-    ul {
+    .ul {
       list-style: none; /*убираем маркеры списка*/
       margin: 0; /*убираем отступы*/
       padding-left: 0; /*убираем отступы*/
@@ -15,7 +15,7 @@
       -o-transition: all 0.3s 0.01s ease;
       -webkit-transition: all 0.3s 0.01s ease;
     }
-    a:hover {
+   a:hover {
       background:#1C85BB;/*добавляем эффект при наведении*/
     }
     li {
