@@ -8,19 +8,28 @@
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
     </head>
+
     <body style="background: #222568">
 
         <ul>
-            <li><a href="">Меню f</a></li>
+            <li><a style="background: #1C85BB" href="">Главная</a></li>
             <li><a href="#">Меню s</a></li>
             <li><a href="#">Меню 3</a></li>
             <li><a href="#">Меню 4</a></li>
         </ul>
 
-        <ul>
-            <li><a href="">Войти</a></li>
-            <li><a href="">Регистрация</a></li>
-        </ul>
+        {% if user.is_authenticated %}
+
+            <h5 style="text-decoration-color: #222568; background: white; display: inline-block; border-radius: 5px;margin: 10px; padding: 10px">Вы авторизованы как {{ user }}</h5>>
+
+        {% else %}
+
+            <ul style="justify-content: right">
+                <li><a href="">Войти</a></li>
+                <li><a href="">Регистрация</a></li>
+            </ul>
+
+        {% endif %}
 
         <div class="content">
             {% block content %}

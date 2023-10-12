@@ -17,8 +17,13 @@ from .serializers import RegistrationSerializer
 
 #Show main page
 def index(request):
+    user = request.user
+    data = {
+        'user': user,
+        'test': 'test_data'
+    }
     template = 'index.html'
-    return render(request, template)
+    return render(request, template, context=data)
 
 class CreateUserView(CreateAPIView):
 
