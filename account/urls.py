@@ -13,5 +13,5 @@ urlpatterns = [
     #ФРОНТ
 
 
-    path('in/', login_page(), name='login_page')
+    path('in/', login_page, name='login_page')
 ]
