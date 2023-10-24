@@ -15,7 +15,8 @@ from django.contrib.auth import get_user_model # If used custom user model
 from .serializers import RegistrationSerializer
 
 
-#Show main page
+#FRONTEND
+#Main page
 def index(request):
     user = request.user
     data = {
@@ -25,6 +26,17 @@ def index(request):
     template = 'index.html'
     return render(request, template, context=data)
 
+#Login page
+
+def login_page(request):
+    template = 'login.html'
+    return render(request, template)
+
+
+
+#BACKEND
+
+#Create new user
 class CreateUserView(CreateAPIView):
 
     model = get_user_model()
@@ -32,9 +44,9 @@ class CreateUserView(CreateAPIView):
         permissions.AllowAny # Or anon users can't register
     ]
     serializer_class = RegistrationSerializer
-# Create your views here.
 
 
+#Authentication
 class CustomTokenObtainPairView(TokenObtainPairView):
     # Replace the serializer with your custom
     serializer_class = CustomTokenObtainPairSerializer

@@ -2,6 +2,7 @@
 {% load static %}
 <html>
     <head>
+
         <title>Портал PyLavaigun</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -25,11 +26,12 @@
         {% else %}
 
             <ul style="justify-content: right">
-                <li><a href="">Войти</a></li>
+                <li><a href="/account/in/">Войти</a></li>
                 <li><a href="">Регистрация</a></li>
             </ul>
 
         {% endif %}
+
 
         <div class="content">
             {% block content %}
