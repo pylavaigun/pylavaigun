@@ -29,7 +29,7 @@ def index(request):
 #Login page
 
 def login_page(request):
-    template = 'login.html'
+    template = 'login_page.html'
     return render(request, template)
 
 
